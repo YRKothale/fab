@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MRPS | Investor Pitch Deck</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Crimson Pro"', 'serif'],
+                        mono: ['"IBM Plex Mono"', 'monospace'],
+                    },
+                    colors: {
+                        'ink': '#111111',
+                        'paper': '#fdfdfc',
+                        'subtle': '#666666',
+                        'accent': '#eaeaea'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-feature-settings: "kern", "liga";
+            -webkit-font-smoothing: antialiased;
+            overflow: hidden; /* Prevent scrolling, use JS for slides */
+            background-color: #fdfdfc;
+        }
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out;
+            display: flex;
+            flex-direction: column;
+        }
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            z-index: 10;
+        }
+        
+        /* Typography utilities */
+        .deck-title { font-size: clamp(3rem, 6vw, 6rem); line-height: 1.1; font-weight: 300; letter-spacing: -0.02em; }
+        .deck-heading { font-size: clamp(2rem, 4vw, 4rem); line-height: 1.1; font-weight: 300; margin-bottom: 2rem; }
+        .deck-text { font-size: clamp(1.25rem, 2vw, 1.75rem); line-height: 1.5; color: #444; }
+        
+        /* Minimalist Visuals */
+        .box-diagram {
+            border: 1px solid #111;
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        .arrow-down {
+            width: 1px;
+            height: 40px;
+            background-color: #111;
+            margin: 0 auto;
+            position: relative;
+        }
+        .arrow-down::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: -4px;
+            border-width: 5px 4.5px 0;
+            border-style: solid;
+            border-color: #111 transparent transparent;
+        }
+        .arrow-right {
+            width: 40px;
+            height: 1px;
+            background-color: #111;
+            display: inline-block;
+            vertical-align: middle;
+            margin: 0 1rem;
+            position: relative;
+        }
+        .arrow-right::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: -4px;
+            border-width: 4.5px 0 4.5px 5px;
+            border-style: solid;
+            border-color: transparent transparent transparent #111;
+        }
+    </style>
+</head>
+<body class="text-ink font-serif selection:bg-ink selection:text-paper">
+
+    <!-- Global Header/Footer for Deck -->
+    <div class="fixed top-0 left-0 w-full p-8 flex justify-between z-50 pointer-events-none">
+        <div class="font-mono text-xs tracking-widest uppercase text-ink font-medium">MRPS_SYSTEM</div>
+        <div class="font-mono text-xs tracking-widest uppercase text-subtle" id="slide-counter">1 / 10</div>
+    </div>
+
+    <div class="fixed bottom-0 left-0 w-full p-8 flex justify-between z-50 pointer-events-none items-end">
+        <div class="font-mono text-xs text-subtle">Confidential Pitch Deck &copy; 2026</div>
+        <div class="flex gap-2 pointer-events-auto">
+            <button onclick="prevSlide()" class="w-10 h-10 border border-ink flex justify-center items-center hover:bg-ink hover:text-paper transition-colors">&larr;</button>
+            <button onclick="nextSlide()" class="w-10 h-10 border border-ink flex justify-center items-center hover:bg-ink hover:text-paper transition-colors">&rarr;</button>
+        </div>
+    </div>
+
+    <!-- SLIDE 1: TITLE -->
+    <div class="slide active px-12 md:px-24 justify-center">
+        <div class="max-w-5xl">
+            <p class="font-mono text-sm text-subtle mb-6 uppercase tracking-widest">Investment Brief</p>
+            <h1 class="deck-title mb-8">Fixing the foundation<br>of science.</h1>
+            <p class="text-2xl text-subtle font-light italic border-l-2 border-ink pl-6">
+                Knowledge. Verified. Research. Accelerated.
+            </p>
+        </div>
+    </div>
+
+    <!-- SLIDE 2: THE PROBLEM -->
+    <div class="slide px-12 md:px-24 justify-center">
+        <div class="max-w-6xl grid md:grid-cols-2 gap-16 items-center">
+            <div>
+                <p class="font-mono text-xs text-subtle mb-4 uppercase tracking-widest">01. The Market Failure</p>
+                <h2 class="deck-heading">The Reproducibility Crisis</h2>
+                <p class="deck-text mb-6">We trust science to drive human progress, but the underlying system is broken.</p>
+                <p class="deck-text mb-6">Over <strong class="text-ink">70% of published experiments</strong> cannot be independently reproduced by other scientists.</p>
+                <p class="deck-text text-subtle italic">Billions of R&D dollars (especially in Pharma & Biotech) are wasted trying to build on results that were never solid to begin with.</p>
+            </div>
+            <div class="bg-accent/30 p-12 border border-accent flex flex-col items-center justify-center">
+                <div class="text-7xl font-light mb-4">70%</div>
+                <div class="font-mono text-sm uppercase tracking-widest text-center">Failure Rate in<br>Replication Studies</div>
+                <div class="mt-8 text-xs text-subtle text-center font-mono">*Source: Nature (2016), eLife (2021)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 3: THE CAUSE -->
+    <div class="slide px-12 md:px-24 justify-center">
+        <div class="max-w-5xl">
+            <p class="font-mono text-xs text-subtle mb-4 uppercase tracking-widest">02. The Cause</p>
+            <h2 class="deck-heading">The PDF Problem</h2>
+            <p class="deck-text mb-12">In 2026, we still share complex, data-driven discoveries as flat, static PDF documents. It’s the equivalent of trying to review a software application by looking at screenshots.</p>
+            
+            <!-- Minimalist Flow Diagram -->
+            <div class="flex flex-col md:flex-row items-center justify-center gap-4 mt-12 opacity-80">
+                <div class="box-diagram bg-white w-48 h-32">Complex<br>Data & Code</div>
+                <div class="arrow-right hidden md:block"></div>
+                <div class="arrow-down md:hidden my-4"></div>
+                <div class="box-diagram bg-white w-48 h-32 border-dashed">Static PDF<br>(Data Lost)</div>
+                <div class="arrow-right hidden md:block"></div>
+                <div class="arrow-down md:hidden my-4"></div>
+                <div class="box-diagram bg-ink text-paper w-48 h-32 border-ink">Unverifiable<br>Claims</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 4: THE SOLUTION -->
+    <div class="slide px-12 md:px-24 justify-center">
+        <div class="max-w-6xl grid md:grid-cols-2 gap-16 items-center">
+            <div>
+                <p class="font-mono text-xs text-subtle mb-4 uppercase tracking-widest">03. The Solution</p>
+                <h2 class="deck-heading">Executable Research</h2>
+                <p class="deck-text mb-6">The <strong>Modern Research Publication & Simulation System (MRPS)</strong> turns static papers into living, executable software.</p>
+                <p class="deck-text text-subtle">Instead of reading a claim, a reviewer clicks "Run". The system spins up a simulation in the cloud, feeds in the data, and proves the math works.</p>
+                <div class="mt-8 font-mono text-sm font-medium uppercase tracking-widest">Think of it as GitHub meets Academic Publishing.</div>
+            </div>
+            <div>
+                 <div class="flex flex-col items-center justify-center gap-2">
+                    <div class="box-diagram w-full border-ink bg-white py-6">1. Ingest Code & Data</div>
+                    <div class="arrow-down my-1"></div>
+                    <div class="box-diagram w-full border-ink bg-white py-6">2. Containerize Environment</div>
+                    <div class="arrow-down my-1"></div>
+                    <div class="box-diagram w-full border-ink bg-white py-6">3. Cloud Execution</div>
+                    <div class="arrow-down my-1"></div>
+                    <div class="box-diagram w-full border-ink bg-ink text-paper py-6 font-bold">4. Verified Research Object</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 5: THE MOAT (PRIVACY) -->
+    <div class="slide px-12 md:px-24 justify-center">
+        <div class="max-w-5xl">
+            <p class="font-mono text-xs text-subtle mb-4 uppercase tracking-widest">04. The Competitive Advantage</p>
+            <h2 class="deck-heading">Verification Without Exposure</h2>
+            <p class="deck-text mb-8">The biggest barrier to open science is privacy (e.g., patient records or proprietary IP). Competitors demand raw data. We don't.</p>
+            
+            <div class="grid md:grid-cols-3 gap-8 mt-12">
+                <div class="border-t border-ink pt-6">
+                    <h3 class="font-serif text-2xl mb-3">Secure Sandboxes</h3>
+                    <p class="text-subtle">We verify the <em>process</em> in a secure "black box." The public sees the "Verified" stamp, but the raw data never leaves the institution.</p>
+                </div>
+                <div class="border-t border-ink pt-6">
+                    <h3 class="font-serif text-2xl mb-3">Cryptographic Proof</h3>
+                    <p class="text-subtle">Every step of the workflow is hashed. An immutable chain of custody proves the research was not tampered with.</p>
+                </div>
+                <div class="border-t border-ink pt-6">
+                    <h3 class="font-serif text-2xl mb-3">Synthetic Data</h3>
+                    <p class="text-subtle">For highly sensitive fields, we generate statistically identical synthetic datasets to allow logical reproducibility testing.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 6: NETWORK EFFECTS -->
+    <div class="slide px-12 md:px-24 justify-center bg-ink text-paper">
+        <div class="max-w-5xl">
+            <p class="font-mono text-xs text-subtle mb-4 uppercase tracking-widest text-gray-400">05. The Network Effect</p>
+            <h2 class="deck-heading text-paper">The Knowledge Map</h2>
+            <p class="text-2xl font-light mb-8">From isolated papers to an interconnected global brain.</p>
+            
+            <p class="text-xl text-gray-400 mb-12 max-w-3xl leading-relaxed">
+                As research is uploaded, MRPS builds a semantic graph in the background. It automatically identifies connections across disparate fields—linking a physics simulation to a biological model. 
+                <br><br>
+                <strong>The Platform acts as an intelligent partner</strong>, alerting researchers to synergies and turning competition into collaboration.
+            </p>
+        </div>
+    </div>
+
+    <!-- SLIDE 7: AUTONOMY -->
+    <div class="slide px-12 md:px-24 justify-center">
+        <div class="max-w-5xl">
+            <p class="font-mono text-xs text-subtle mb-4 uppercase tracking-widest">06. The Vision</p>
+            <h2 class="deck-heading">The Infrastructure for Autonomous Science</h2>
+            <p class="deck-text mb-8">The future of discovery isn't human-only.</p>
+            
+            <div class="border-l-4 border-ink pl-8 py-2 mb-12">
+                <p class="text-2xl text-ink leading-relaxed">
+                    By transitioning from human-readable PDFs to a dynamic, machine-readable context layer, MRPS becomes the native environment where <strong>autonomous AI agents can seamlessly query, execute, verify, and publish</strong> structured scientific knowledge.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 8: BUSINESS MODEL / IMPACT -->
+    <div class="slide px-12 md:px-24 justify-center">
+        <div class="max-w-6xl">
+            <p class="font-mono text-xs text-subtle mb-4 uppercase tracking-widest">07. Sector Impact & Target Markets</p>
+            <h2 class="deck-heading">Where the Value Accrues</h2>
+            
+            <div class="grid md:grid-cols-2 gap-x-16 gap-y-12 mt-8">
+                <div>
+                    <h3 class="font-mono text-sm uppercase tracking-widest mb-2 border-b border-subtle pb-2">Pharma & Biotech</h3>
+                    <p class="text-xl"><strong>Risk Reduction.</strong> Companies use our sandboxes to validate computational models *before* licensing university IP, saving millions in dead-end R&D.</p>
+                </div>
+                <div>
+                    <h3 class="font-mono text-sm uppercase tracking-widest mb-2 border-b border-subtle pb-2">AI & Machine Learning</h3>
+                    <p class="text-xl"><strong>Reproducible Benchmarks.</strong> Containerized research ensures an AI model claiming 95% accuracy can be run in identical environments anywhere.</p>
+                </div>
+                <div>
+                    <h3 class="font-mono text-sm uppercase tracking-widest mb-2 border-b border-subtle pb-2">Academic Institutions</h3>
+                    <p class="text-xl"><strong>Reputation & Compliance.</strong> Automates compliance with strict Open Science mandates (FAIR principles) and prevents high-profile retractions.</p>
+                </div>
+                <div>
+                    <h3 class="font-mono text-sm uppercase tracking-widest mb-2 border-b border-subtle pb-2">Public Policy</h3>
+                    <p class="text-xl"><strong>Auditable Evidence.</strong> Policymakers receive interactive simulations, allowing them to stress-test assumptions directly within the research object.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 9: ROADMAP -->
+    <div class="slide px-12 md:px-24 justify-center">
+        <div class="max-w-5xl">
+            <p class="font-mono text-xs text-subtle mb-4 uppercase tracking-widest">08. Execution</p>
+            <h2 class="deck-heading">24-Month Roadmap</h2>
+            
+            <div class="relative mt-12 border-l border-ink pl-8 space-y-12">
+                <div class="relative">
+                    <div class="absolute w-3 h-3 bg-ink rounded-full -left-[38px] top-2"></div>
+                    <h3 class="font-serif text-2xl font-semibold">Phase 1 (Months 0-6): The MVP</h3>
+                    <p class="text-subtle text-lg mt-1">Focus on Systems Biology. Establish the "Executable Paper" model and container architecture.</p>
+                </div>
+                <div class="relative">
+                    <div class="absolute w-3 h-3 bg-white border border-ink rounded-full -left-[38px] top-2"></div>
+                    <h3 class="font-serif text-2xl text-subtle">Phase 2 (Months 6-12): Domain Expansion</h3>
+                    <p class="text-subtle text-lg mt-1">Scale backend to support Physics, Chemistry, and Machine Learning workflows.</p>
+                </div>
+                <div class="relative">
+                    <div class="absolute w-3 h-3 bg-white border border-ink rounded-full -left-[38px] top-2"></div>
+                    <h3 class="font-serif text-2xl text-subtle">Phase 3 (Months 12-18): Pilots & Revenue</h3>
+                    <p class="text-subtle text-lg mt-1">Launch institutional pilots. Formalize partnerships with publishers and research universities.</p>
+                </div>
+                <div class="relative">
+                    <div class="absolute w-3 h-3 bg-white border border-ink rounded-full -left-[38px] top-2"></div>
+                    <h3 class="font-serif text-2xl text-subtle">Phase 4 (Months 18-24): The Global Protocol</h3>
+                    <p class="text-subtle text-lg mt-1">Establish international standardization (ISO) and a global network of federated research nodes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SLIDE 10: END -->
+    <div class="slide px-12 md:px-24 justify-center items-center text-center">
+        <div class="max-w-4xl">
+            <h2 class="deck-title mb-8">Let's build the backbone<br>of trustworthy science.</h2>
+            <p class="text-xl text-subtle mb-12">Seeking seed capital to execute Phase 1 and hire the core engineering team.</p>
+            
+            <a href="mailto:partnerships@modernresearch.ai" class="inline-block font-mono text-sm border border-ink px-8 py-4 hover:bg-ink hover:text-paper transition-all uppercase tracking-widest">
+                partnerships@modernresearch.ai
+            </a>
+            <div class="mt-8 font-mono text-xs text-subtle">www.modernresearch.ai</div>
+        </div>
+    </div>
+
+    <!-- Deck Logic -->
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const counter = document.getElementById('slide-counter');
+
+        function updateDeck() {
+            slides.forEach((slide, index) => {
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else {
+                    slide.classList.remove('active');
+                }
+            });
+            counter.innerText = `${currentSlide + 1} / ${slides.length}`;
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                updateDeck();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateDeck();
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'Spacebar' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+            }
+        });
+
+        // Initialize
+        updateDeck();
+    </script>
+</body>
+</html>
